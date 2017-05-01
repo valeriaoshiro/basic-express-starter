@@ -1,9 +1,11 @@
+
 # Node build artifacts
 node_modules
 npm-debug.log
 
-# Local development
+# API keys and secrets
 *.env
-*.dev
-sessions
+
+# OS metadata
 .DS_Store
+Thumbs.db

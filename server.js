@@ -1,136 +1,155 @@
-var express      = require('express');
-var path         = require('path');
-var logger       = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser   = require('body-parser');
-var session      = require('express-session');
-var debug        = require('debug')('server');
-var http         = require('http');
+const path = require('path');
+const http = require('http');
+const dotenv = require('dotenv');
+const express = require('express');
+const logger = require('morgan');
+const bodyParser = require('body-parser');
+const helmet = require('helmet');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const debug = require('debug')('server');
+const nunjucks = require('nunjucks');
 
-var routes       = require('./routes/index');
+const routes = require('./routes/index');
+
 
 // ======================================
-// start express app 
+// Load environment variables from .env file, where API keys and passwords are configured.
 //
-var app = express();
-
+dotenv.load({ path: app.get('env') === 'development' ? '.env.dev' : '.env.prod' });
 
 // ======================================
-// view engine setup 
+// start express app
 //
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+const app = express();
+app.use(helmet()); // security middlewares
 
 
 // ======================================
-// general setup 
+// view engine setup
+//
+nunjucks.configure(path.join(__dirname, 'views'), {
+  autoescape: true,
+  express: app,
+});
+app.set('view engine', 'njk');
+
+
+// ======================================
+// general setup
 //
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// ======================================
+// session setup
+//
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: process.env.SESSION_SECRET,
+  store: new MongoStore({
+    url: process.env.MONGODB_URI || process.env.MONGOLAB_URI,
+    autoReconnect: true,
+    clear_interval: 3600,
+  }),
+}));
 
 // ======================================
-// middlewares 
+// middlewares
 //
 
 
 // ======================================
-// routes 
+// routes
 //
 app.use('/', routes);
 
 
 // ======================================
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+//
+app.use((req, res, next) => {
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 
 // ======================================
-// error handlers 
+// error handlers
+//
+app.use((err, req, res) => {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+  // render the error page
   res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+  res.render('error');
 });
 
 
 // ======================================
-// create server 
+// create server
 
-var port = normalizePort(process.env.PORT || '5000');
+const port = normalizePort(process.env.PORT || '5000');
 app.set('port', port);
-var server = http.createServer(app);
+const server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
 // ======================================
-// connect to mongodb 
+// connect to mongodb
 
 
 // ======================================
 // functions
 
-// Normalize a port into a number, string, or false.
-function normalizePort(val) {
-  var port = parseInt(val, 10);
+/**
+ * Normalize a port into a number, string, or false.
+ */
 
-  if (isNaN(port)) {
+function normalizePort(val) {
+  const portNormalized = parseInt(val, 10);
+
+  if (isNaN(portNormalized)) {
     // named pipe
     return val;
   }
 
-  if (port >= 0) {
+  if (portNormalized >= 0) {
     // port number
-    return port;
+    return portNormalized;
   }
 
   return false;
 }
 
+/**
+ * Event listener for HTTP server "error" event.
+ */
 
-// Event listener for HTTP server "error" event.
 function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
   }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  const bind = typeof port === 'string'
+    ? `Pipe ${port}`
+    : `Port ${port}`;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
+      console.error(`${bind} requires elevated privileges`);
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
+      console.error(`${bind} is already in use`);
       process.exit(1);
       break;
     default:
@@ -138,12 +157,15 @@ function onError(error) {
   }
 }
 
+/**
+ * Event listener for HTTP server "listening" event.
+ */
 
-// Event listener for HTTP server "listening" event.
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  const addr = server.address();
+  const bind = typeof addr === 'string'
+    ? `pipe ${addr}`
+    : `port ${addr.port}`;
+  debug(`Listening on ${bind}`);
 }
+
