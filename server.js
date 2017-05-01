@@ -1,6 +1,12 @@
+const dotenv = require('dotenv');
+
+// ======================================
+// Load environment variables, where API keys and passwords are configured.
+//
+dotenv.load({ path: process.env.NODE_ENV === 'development' ? '.env.dev' : '.env.prod' });
+
 const path = require('path');
 const http = require('http');
-const dotenv = require('dotenv');
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
@@ -12,11 +18,6 @@ const nunjucks = require('nunjucks');
 
 const routes = require('./routes/index');
 
-
-// ======================================
-// Load environment variables from .env file, where API keys and passwords are configured.
-//
-dotenv.load({ path: app.get('env') === 'development' ? '.env.dev' : '.env.prod' });
 
 // ======================================
 // start express app
