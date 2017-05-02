@@ -1,9 +1,5 @@
-const dotenv = require('dotenv');
-
-// ======================================
 // Load environment variables, where API keys and passwords are configured.
-//
-dotenv.load({ path: process.env.NODE_ENV === 'development' ? '.env.dev' : '.env.prod' });
+require('dotenv').load({ path: process.env.NODE_ENV === 'development' ? '.env.dev' : '.env.prod' });
 
 const path = require('path');
 const http = require('http');
@@ -15,6 +11,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const debug = require('debug')('server');
 const nunjucks = require('nunjucks');
+const connectFlash = require('connect-flash');
 
 const routes = require('./routes/index');
 
@@ -57,6 +54,16 @@ app.use(session({
     clear_interval: 3600,
   }),
 }));
+
+// ======================================
+// flash messages setup
+//
+app.use((req, res, next) => {
+  connectFlash()(req, res, () => {
+    res.locals.messages = req.flash();
+    next();
+  });
+});
 
 // ======================================
 // middlewares
@@ -110,10 +117,7 @@ server.on('listening', onListening);
 // ======================================
 // functions
 
-/**
- * Normalize a port into a number, string, or false.
- */
-
+// Normalize a port into a number, string, or false.
 function normalizePort(val) {
   const portNormalized = parseInt(val, 10);
 
@@ -130,10 +134,7 @@ function normalizePort(val) {
   return false;
 }
 
-/**
- * Event listener for HTTP server "error" event.
- */
-
+// Event listener for HTTP server "error" event.
 function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
@@ -158,10 +159,7 @@ function onError(error) {
   }
 }
 
-/**
- * Event listener for HTTP server "listening" event.
- */
-
+// Event listener for HTTP server "listening" event.
 function onListening() {
   const addr = server.address();
   const bind = typeof addr === 'string'
