@@ -119,7 +119,7 @@ app.post('/login', userController.postLogin);
 app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
 app.get('/logout', userController.logout);
-
+app.get('/account', passportConfig.ensureLoggedIn(), userController.getAccount);
 
 // ======================================
 // catch 404 and forward to error handler

@@ -1,0 +1,52 @@
+{% extends "_templates/base.njk" %}
+
+{% block main %}
+
+<h1 class='page-header'>Profile</h1>
+
+<div class="col-md-9 mx-auto">
+
+  <div class="row justify-content-around">
+    <div class="col-sm-6 col-md-5 mb-4">
+      <h2>Basic Information</h2>
+
+      <form>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input value='{{ user.email }}' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
+          {# <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> #}
+        </div>
+        <div class="form-group">
+          <label for="firstName">First name</label>
+          <input value='{{ user.first_name }}' type="text" class="form-control" id="firstName" aria-describedby="firstName" >
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last name</label>
+          <input value='{{ user.last_name }}' type="text" class="form-control" id="lastName" aria-describedby="lastName" >
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+
+    </div>
+    <div class="col-sm-6 col-md-5 mb-4">
+      <h2>Change Password</h2>
+      <form>
+        <div class="form-group">
+          <label for="currentPassword">Verify Current Password</label>
+          <input type="password" class="form-control" id="currentPassword">
+        </div>
+        <div class="form-group"><div class="form-group">
+          <label for="newPassword">New Password</label>
+          <input type="password" class="form-control" id="newPassword">
+        </div>
+          <label for="confirmNewPassword">Confurm New Password</label>
+          <input type="password" class="form-control" id="confirmNewPassword">
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
