@@ -2,8 +2,7 @@
 
 {% block main %}
 
-<h1>{{ message }}</h1>
-<h2>{{ error.status }}</h2>
+<h1 class='page-header'>{{ error.status }} - {{ message }}</h1>
 <pre>{{ error.stack }}</pre>
 
 {% endblock %}

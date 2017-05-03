@@ -2,6 +2,51 @@ const passport = require('passport');
 const User = require('../models/User');
 
 // ======================================
+// GET /login
+// Login page.
+//
+exports.getLogin = (req, res) => {
+  if (req.user) {
+    return res.redirect('/');
+  }
+  res.render('account/login', {
+    title: 'Login',
+  });
+};
+
+
+// ======================================
+// POST /login
+// Sign in using email and password.
+//
+exports.postLogin = (req, res, next) => {
+  req.assert('email', 'Email is not valid').isEmail();
+  req.assert('password', 'Password cannot be blank').notEmpty();
+  req.sanitize('email').normalizeEmail({ remove_dots: false });
+
+  const errors = req.validationErrors();
+
+  if (errors) {
+    req.flash('danger', errors.map(err => err.msg));
+    return res.redirect('/login');
+  }
+
+  passport.authenticate('local', (err, user, info) => {
+    if (err) { return next(err); }
+    if (!user) {
+      req.flash('danger', info);
+      return res.redirect('/login');
+    }
+    req.logIn(user, (err) => {
+      if (err) { return next(err); }
+      req.flash('success', 'Success! You are logged in.');
+      res.redirect(req.session.returnTo || '/');
+    });
+  })(req, res, next);
+};
+
+
+// ======================================
 // GET /signup
 // Signup page
 //
@@ -40,7 +85,7 @@ exports.postSignup = (req, res, next) => {
   User.findOne({ email: req.body.email }, (err, existingUser) => {
     if (err) { return next(err); }
     if (existingUser) {
-      req.flash('danger', { msg: 'Account with that email address already exists.' });
+      req.flash('danger', 'Account with that email address already exists.');
       return res.redirect('/signup');
     }
     user.save((err) => {
