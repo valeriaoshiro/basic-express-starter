@@ -1,0 +1,38 @@
+{% extends "_templates/base.njk" %}
+
+{% block main %}
+
+<h1 class='page-header'>Create an Account</h1>
+
+<div class="col-md-8 mx-auto">
+
+  <form method='POST'>
+    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+    <div class="form-group row">
+      <label for="inputEmail" class="col-sm-3 col-form-label">Email</label>
+      <div class="col-sm-9">
+        <input name='email' type="email" class="form-control" id="email" placeholder="Email">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
+      <div class="col-sm-9">
+        <input name='password' type="password" class="form-control" id="password" placeholder="Password">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="ConfirmInputPassword" class="col-sm-3 col-form-label">Confirm Password</label>
+      <div class="col-sm-9">
+        <input name='confirmPassword' type="password" class="form-control" id="confirmPassword" placeholder="Password">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="offset-sm-3 col-sm-9">
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+      </div>
+    </div>
+  </form>
+
+</div>
+
+{% endblock %}

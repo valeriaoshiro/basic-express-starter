@@ -1,0 +1,14 @@
+body {
+  /*padding-top: 5rem;*/
+}
+
+.border-bottom {
+  border-bottom: 1px solid #ededed;
+}
+
+.page-header {
+  padding-bottom: 1rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid #ededed;
+}
+

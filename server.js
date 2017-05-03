@@ -12,8 +12,16 @@ const MongoStore = require('connect-mongo')(session);
 const debug = require('debug')('server');
 const nunjucks = require('nunjucks');
 const connectFlash = require('connect-flash');
+const mongoose = require('mongoose');
+const chalk = require('chalk');
+const passport = require('passport');
+const expressValidator = require('express-validator');
+const csrf = require('csurf');
 
-const routes = require('./routes/index');
+const passportConfig = require('./config/passport');
+
+const homeController = require('./controllers/home');
+const userController = require('./controllers/user');
 
 
 // ======================================
@@ -36,10 +44,27 @@ app.set('view engine', 'njk');
 // ======================================
 // general setup
 //
-app.use(logger('dev'));
+const loggerOption = (app.get('env') === 'development') ? 'dev' : 'tiny';
+app.use(logger(loggerOption));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(expressValidator());
+
+
+// ======================================
+// MongoDB setup
+//
+mongoose.Promise = global.Promise;
+mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
+mongoose.connection.on('error', (err) => {
+  console.error(err);
+  console.log(`${chalk.red('✗')} MongoDB connection error. Please make sure MongoDB is running.`);
+  process.exit();
+});
+mongoose.connection.once('open', () => {
+  debug('mongodb connection established');
+});
 
 // ======================================
 // session setup
@@ -56,6 +81,14 @@ app.use(session({
 }));
 
 // ======================================
+// csrf protection
+//
+app.use(csrf(), (req, res, next) => {
+  res.locals.csrfToken = req.csrfToken();
+  next();
+});
+
+// ======================================
 // flash messages setup
 //
 app.use((req, res, next) => {
@@ -66,14 +99,24 @@ app.use((req, res, next) => {
 });
 
 // ======================================
-// middlewares
+// Setup passportjs
 //
+app.use(passport.initialize());
+app.use(passport.session());
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  next();
+});
 
 
 // ======================================
-// routes
+// Primary app routes.
 //
-app.use('/', routes);
+app.get('/', homeController.index);
+app.get('/test', homeController.test);
+app.get('/signup', userController.getSignup);
+app.post('/signup', userController.postSignup);
+app.get('/logout', userController.logout);
 
 
 // ======================================
@@ -89,7 +132,7 @@ app.use((req, res, next) => {
 // ======================================
 // error handlers
 //
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -109,10 +152,6 @@ const server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
-
-// ======================================
-// connect to mongodb
-
 
 // ======================================
 // functions

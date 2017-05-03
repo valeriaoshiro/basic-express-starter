@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>{{ title }}</title>
-    <link rel='stylesheet' href='/stylesheets/main.css' />
-  </head>
-  <body>
-    <div class="alert">{{ messages.info }}</div>
-    <h1>{{ title }}</h1>
-    <p>Welcome to {{ title }}</p>
-  </body>
-</html>
+{% extends "_templates/base.njk" %}
+
+{% block main %}
+
+<h1 class='page-header'>Home Page</h1>
+
+{% endblock %}
