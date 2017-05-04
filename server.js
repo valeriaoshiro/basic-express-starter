@@ -121,6 +121,7 @@ app.get('/logout', userController.logout);
 app.get('/account', passportConfig.ensureLoggedIn(), userController.getAccount);
 app.post('/account/password', passportConfig.ensureLoggedIn(), userController.postUpdatePassword);
 app.post('/account/profile', passportConfig.ensureLoggedIn(), userController.postUpdateProfile);
+app.post('/account/delete', passportConfig.ensureLoggedIn(), userController.postDeleteAccount);
 
 
 app.get('/test', passportConfig.ensureLoggedIn(), (req, res, next) => {

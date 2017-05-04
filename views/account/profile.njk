@@ -6,9 +6,10 @@
 
 <div class="col-md-9 mx-auto">
 
-  <div class="row justify-content-around">
+  <h2 class='page-header'>Account</h2>
+  <div class="row justify-content-around mb-3">
     <div class="col-sm-6 col-md-5 mb-4">
-      <h2>Basic Information</h2>
+      <h3>Basic Information</h3>
 
       <form method="POST" action="/account/profile">
         <input type="hidden" name="_csrf" value="{{ csrfToken }}">
@@ -30,7 +31,7 @@
 
     </div>
     <div class="col-sm-6 col-md-5 mb-4">
-      <h2>Change Password</h2>
+      <h3>Change Password</h3>
       <form method="POST" action="/account/password">
         <input type="hidden" name="_csrf" value="{{ csrfToken }}">
         <div class="form-group">
@@ -45,6 +46,20 @@
           <input name='confirmNewPassword' type="password" class="form-control" id="confirmNewPassword">
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+    </div>
+  </div>
+
+  <h2 class='page-header'>Social</h2>
+  <div class="row justify-content-around mb-3">
+  </div>
+
+  <h2 class='page-header'>Delete Account</h2>
+  <div class="row justify-content-around mb-3">
+    <div class="col-md-6 mb-4">
+      <form method='POST' action="/account/delete">
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+        <button type="submit" class="btn btn-danger btn-lg btn-block">Delete Account</button>
       </form>
     </div>
   </div>

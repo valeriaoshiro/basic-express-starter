@@ -189,3 +189,17 @@ exports.postUpdateProfile = (req, res, next) => {
     });
   });
 };
+
+
+// ======================================
+// POST /account/delete
+// Delete user account.
+//
+exports.postDeleteAccount = (req, res, next) => {
+  User.remove({ _id: req.user.id }, (err) => {
+    if (err) { return next(err); }
+    req.logout();
+    req.flash('info', 'Your account has been deleted.');
+    res.redirect('/');
+  });
+};
