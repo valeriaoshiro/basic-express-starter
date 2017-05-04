@@ -11,6 +11,7 @@
       <h2>Basic Information</h2>
 
       <form>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
         <div class="form-group">
           <label for="exampleInputEmail1">Email address</label>
           <input value='{{ user.email }}' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
@@ -30,17 +31,18 @@
     </div>
     <div class="col-sm-6 col-md-5 mb-4">
       <h2>Change Password</h2>
-      <form>
+      <form method="POST" action="/account/password">
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
         <div class="form-group">
           <label for="currentPassword">Verify Current Password</label>
-          <input type="password" class="form-control" id="currentPassword">
+          <input name='currentPassword' type="password" class="form-control" id="currentPassword">
         </div>
         <div class="form-group"><div class="form-group">
           <label for="newPassword">New Password</label>
-          <input type="password" class="form-control" id="newPassword">
+          <input name='newPassword' type="password" class="form-control" id="newPassword">
         </div>
-          <label for="confirmNewPassword">Confurm New Password</label>
-          <input type="password" class="form-control" id="confirmNewPassword">
+          <label for="confirmNewPassword">Confirm New Password</label>
+          <input name='confirmNewPassword' type="password" class="form-control" id="confirmNewPassword">
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
       </form>

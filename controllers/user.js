@@ -120,3 +120,36 @@ exports.getAccount = (req, res) => {
     title: 'Account Management',
   });
 };
+
+// ======================================
+// POST /account/password
+// Update current password.
+//
+exports.postUpdatePassword = (req, res, next) => {
+  req.assert('newPassword', 'Password must be at least 4 characters long').len(4);
+  req.assert('confirmNewPassword', 'Passwords do not match').equals(req.body.newPassword);
+
+  const errors = req.validationErrors();
+
+  if (errors) {
+    req.flash('danger', errors.map(err => err.msg));
+    return res.redirect('/account');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.comparePassword(req.body.currentPassword)
+      .then((isMatch) => {
+        if (!isMatch) {
+          req.flash('danger', 'Current password is incorrect');
+          return res.redirect('/account');
+        }
+        user.password = req.body.newPassword;
+        user.save((err) => {
+          if (err) { return next(err); }
+          req.flash('success', 'Password has been changed.');
+          res.redirect('/account');
+        });
+      }).catch(err => next(err));
+  });
+};

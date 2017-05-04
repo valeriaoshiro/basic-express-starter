@@ -113,13 +113,18 @@ app.use((req, res, next) => {
 // Primary app routes.
 //
 app.get('/', homeController.index);
-app.get('/test', homeController.test);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
 app.get('/logout', userController.logout);
 app.get('/account', passportConfig.ensureLoggedIn(), userController.getAccount);
+app.post('/account/password', passportConfig.ensureLoggedIn(), userController.postUpdatePassword);
+
+
+app.get('/test', passportConfig.ensureLoggedIn(), (req, res, next) => {
+  res.status(200).json({ success: true });
+});
 
 // ======================================
 // catch 404 and forward to error handler
