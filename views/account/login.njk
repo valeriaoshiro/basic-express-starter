@@ -6,7 +6,7 @@
 
 <div class="col-md-8 mx-auto">
 
-  <form method='POST'>
+  <form method='POST' class='border-bottom'>
     <input type="hidden" name="_csrf" value="{{ csrfToken }}">
     <div class="form-group row">
       <label for="inputEmail" class="col-sm-3 col-form-label">Email</label>
@@ -27,6 +27,17 @@
     </div>
   </form>
 
+  <div class="col-sm-9 offset-sm-3">.
+    <a href='#' class="btn btn-block btn-social btn-facebook">
+      <span class="fa fa-facebook"></span> Sign in with Facebook
+    </a>
+    <a href='#' class="btn btn-block btn-social btn-instagram">
+      <span class="fa fa-instagram"></span> Sign in with Instagram
+    </a>
+  </div>
+
 </div>
+
+
 
 {% endblock %}
