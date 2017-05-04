@@ -34,8 +34,8 @@ describe('User', function() {
       email: 'test1@gmail.com',
       password: 'test711',
       profile: {
-        name: 'mohammad',
-        gender: 'male',
+        first_name: 'mohammad',
+        last_name: 'mohammad',
         location: 'Los Angeles',
       },
     });

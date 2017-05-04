@@ -153,3 +153,39 @@ exports.postUpdatePassword = (req, res, next) => {
       }).catch(err => next(err));
   });
 };
+
+
+// ======================================
+// POST /account/profile
+// Update profile information.
+//
+exports.postUpdateProfile = (req, res, next) => {
+  req.assert('email', 'Please enter a valid email address.').isEmail();
+  req.sanitize('email').normalizeEmail({ remove_dots: false });
+
+  const errors = req.validationErrors();
+
+  if (errors) {
+    req.flash('danger', errors.map(err => err.msg));
+    return res.redirect('/account');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.email = req.body.email || '';
+    user.profile.first_name = req.body.firstName || '';
+    user.profile.last_name = req.body.lastName || '';
+    user.profile.location = req.body.location || '';
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('danger', 'The email address you have entered is already associated with an account.');
+          return res.redirect('/account');
+        }
+        return next(err);
+      }
+      req.flash('success', 'Profile information has been updated.');
+      res.redirect('/account');
+    });
+  });
+};

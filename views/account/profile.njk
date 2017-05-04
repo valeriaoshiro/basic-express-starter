@@ -10,20 +10,20 @@
     <div class="col-sm-6 col-md-5 mb-4">
       <h2>Basic Information</h2>
 
-      <form>
+      <form method="POST" action="/account/profile">
         <input type="hidden" name="_csrf" value="{{ csrfToken }}">
         <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
-          <input value='{{ user.email }}' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
+          <label for="email">Email address</label>
+          <input name='email' value='{{ user.email }}' type="email" class="form-control" id="email" aria-describedby="emailHelp" >
           {# <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> #}
         </div>
         <div class="form-group">
           <label for="firstName">First name</label>
-          <input value='{{ user.first_name }}' type="text" class="form-control" id="firstName" aria-describedby="firstName" >
+          <input name='firstName' value='{{ user.profile.first_name }}' type="text" class="form-control" id="firstName" aria-describedby="firstName" >
         </div>
         <div class="form-group">
           <label for="lastName">Last name</label>
-          <input value='{{ user.last_name }}' type="text" class="form-control" id="lastName" aria-describedby="lastName" >
+          <input name='lastName' value='{{ user.profile.last_name }}' type="text" class="form-control" id="lastName" aria-describedby="lastName" >
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
       </form>
