@@ -8,6 +8,7 @@ This is an almost replica of [hackathon-starter](https://github.com/sahat/hackat
 * Setup Webpack for SASS & js
 * hook webpack-hot-middleware and webpack-dev-middleware
 * Add mailgun mail service
+* Upload files to S3 instead of project directory
 
 ## Differences from hackathon-starter
 
