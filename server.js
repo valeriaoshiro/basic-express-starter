@@ -128,6 +128,7 @@ app.get('/account', passportConfig.ensureLoggedIn(), userController.getAccount);
 app.post('/account/password', passportConfig.ensureLoggedIn(), userController.postUpdatePassword);
 app.post('/account/profile', passportConfig.ensureLoggedIn(), userController.postUpdateProfile);
 app.post('/account/delete', passportConfig.ensureLoggedIn(), userController.postDeleteAccount);
+app.get('/account/unlink/:provider', passportConfig.ensureLoggedIn(), userController.getOauthUnlink);
 
 
 // ======================================
@@ -135,7 +136,9 @@ app.post('/account/delete', passportConfig.ensureLoggedIn(), userController.post
 //
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'public_profile'] }));
 app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), (req, res) => {
-  res.redirect(req.session.returnTo || '/');
+  const redirectTo = req.session.returnTo || '/';
+  delete req.session.returnTo;
+  res.redirect(redirectTo);
 });
 
 app.get('/test', passportConfig.ensureLoggedIn(), passportConfig.isAuthorized('facebook'),

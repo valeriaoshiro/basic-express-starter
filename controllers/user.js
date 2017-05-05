@@ -42,7 +42,9 @@ exports.postLogin = (req, res, next) => {
     req.logIn(user, (err) => {
       if (err) { return next(err); }
       req.flash('success', 'Success! You are logged in.');
-      res.redirect(req.session.returnTo || '/');
+      const redirectTo = req.session.returnTo || '/';
+      delete req.session.returnTo;
+      res.redirect(redirectTo);
     });
   })(req, res, next);
 };
@@ -96,6 +98,7 @@ exports.postSignup = (req, res, next) => {
         if (err) {
           return next(err);
         }
+        req.flash('success', 'Account created successfully');
         res.redirect('/');
       });
     });
@@ -204,5 +207,24 @@ exports.postDeleteAccount = (req, res, next) => {
     req.logout();
     req.flash('info', 'Your account has been deleted.');
     res.redirect('/');
+  });
+};
+
+
+// ======================================
+// GET /account/unlink/:provider
+// Unlink OAuth provider.
+//
+exports.getOauthUnlink = (req, res, next) => {
+  const provider = req.params.provider;
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user[provider] = undefined;
+    user.tokens = user.tokens.filter(token => token.kind !== provider);
+    user.save((err) => {
+      if (err) { return next(err); }
+      req.flash('info', `${provider} account has been unlinked.`);
+      res.redirect('/account');
+    });
   });
 };

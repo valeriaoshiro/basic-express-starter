@@ -65,6 +65,7 @@ exports.isAuthorized = provider => (
     if (token) {
       next();
     } else {
+      if (req.session) req.session.returnTo = req.originalUrl || req.url;
       res.redirect(`/auth/${provider}`);
     }
   }
