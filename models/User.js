@@ -7,10 +7,14 @@ const userSchema = new mongoose.Schema({
   password: String,
   passwordResetToken: String,
   passwordResetExpires: Date,
+
+  facebook: String,
+  instagram: String,
+  tokens: Array,
+
   profile: {
     first_name: String,
     last_name: String,
-    location: String,
   },
 }, { timestamps: true });
 

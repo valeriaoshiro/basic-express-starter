@@ -32,7 +32,9 @@ exports.postLogin = (req, res, next) => {
   }
 
   passport.authenticate('local', (err, user, info) => {
-    if (err) { return next(err); }
+    if (err) {
+      return next(err);
+    }
     if (!user) {
       req.flash('danger', info);
       return res.redirect('/login');
@@ -107,6 +109,7 @@ exports.postSignup = (req, res, next) => {
 //
 exports.logout = (req, res) => {
   req.logout();
+  req.flash('info', 'Logged out successfully');
   res.redirect('/');
 };
 

@@ -92,8 +92,14 @@ app.use(csrf(), (req, res, next) => {
 // flash messages setup
 //
 app.use((req, res, next) => {
-  connectFlash()(req, res, () => {
-    res.locals.messages = req.flash();
+  connectFlash()(req, res, function() {
+    // res.locals.messages = req.flash();
+    const render = res.render;
+    res.render = function (...args) {
+      // attach flash messages to res.locals.messages
+      res.locals.messages = req.flash();
+      render.call(res, ...args);
+    };
     next();
   });
 });
@@ -124,9 +130,18 @@ app.post('/account/profile', passportConfig.ensureLoggedIn(), userController.pos
 app.post('/account/delete', passportConfig.ensureLoggedIn(), userController.postDeleteAccount);
 
 
-app.get('/test', passportConfig.ensureLoggedIn(), (req, res, next) => {
-  res.status(200).json({ success: true });
+// ======================================
+// OAuth authentication routes. (Sign in)
+//
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'public_profile'] }));
+app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), (req, res) => {
+  res.redirect(req.session.returnTo || '/');
 });
+
+app.get('/test', passportConfig.ensureLoggedIn(), passportConfig.isAuthorized('facebook'),
+  (req, res, next) => {
+    res.status(200).json({ success: true });
+  });
 
 // ======================================
 // catch 404 and forward to error handler
