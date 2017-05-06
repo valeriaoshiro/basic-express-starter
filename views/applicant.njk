@@ -1,0 +1,11 @@
+{% extends "_templates/base.njk" %}
+
+{% block main %}
+
+<h1 class='page-header'>Applicant</h1>
+{% if user %}
+    <div id="github-api-data"></div>
+{% else %}
+    hey, you aren't logged wtf dude. get an account dawg
+{% endif %}
+{% endblock %}
