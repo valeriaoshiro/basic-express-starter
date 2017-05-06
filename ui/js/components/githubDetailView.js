@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class ApplicantsPage extends React.Component {
+class GithubDetailView extends React.Component {
     constructor(props) {
         super(props);
         this.displayName = 'ApplicantsPage';
@@ -33,10 +33,10 @@ class ApplicantsPage extends React.Component {
 
 }
 
-ApplicantsPage.propTypes = {
+GithubDetailView.propTypes = {
     username: PropTypes.string.isRequired,
     userData: PropTypes.object.isRequired,
     repos: PropTypes.array.isRequired
 };
 
-export default ApplicantsPage;
+export default GithubDetailView;

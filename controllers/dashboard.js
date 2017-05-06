@@ -29,6 +29,7 @@ exports.getUserProfile = (req, res, next) => {
         {
           title: `User Profile: ${user_profile.profile.first_name} ${user_profile.profile.last_name}`,
           user_profile,
+          pageName: 'detailView'
         }
       )
     })

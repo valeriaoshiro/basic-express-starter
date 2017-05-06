@@ -122,7 +122,7 @@ app.use((req, res, next) => {
 app.get('/', homeController.index);
 app.get('/dashboard', passportConfig.ensureLoggedIn({role: 'admin'}), dashController.getDashboard);
 app.get('/dashboard/:userid', passportConfig.ensureLoggedIn({role: 'admin'}), dashController.getUserProfile);
-// app.get('/dashboard/profile/:applicant', passportConfig.ensureLoggedIn({role: 'admin'}), homeController.index)
+app.get('/dashboard/:userid/detail', passportConfig.ensureLoggedIn({role: 'admin'}), dashController.getUserProfile);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/signup', userController.getSignup);
@@ -135,7 +135,7 @@ app.post('/account/delete', passportConfig.ensureLoggedIn(), userController.post
 app.get('/account/unlink/:provider', passportConfig.ensureLoggedIn(), userController.getOauthUnlink);
 
 app.get('/applicant', (req, res) => {
-  res.render('applicant', {pageName: 'applicant'});
+  res.render('applicant', {pageName: 'detailView'});
 });
 
 // ======================================
