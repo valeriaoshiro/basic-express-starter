@@ -43,6 +43,7 @@ exports.ensureLoggedIn = (options = {}) => {
   }
 
   const url = options.redirectTo || '/login';
+  const role = options.role;
   const setReturnTo = (options.setReturnTo === undefined) ? true : options.setReturnTo;
 
   return (req, res, next) => {
@@ -51,6 +52,10 @@ exports.ensureLoggedIn = (options = {}) => {
         req.session.returnTo = req.originalUrl || req.url;
       }
       return res.redirect(url);
+    }
+    else if (role && role !== req.user.role) {
+      req.flash('danger', 'You do not have permissions to access this page');
+      return res.redirect('/');
     }
     next();
   };

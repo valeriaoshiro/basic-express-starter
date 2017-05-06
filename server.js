@@ -119,6 +119,8 @@ app.use((req, res, next) => {
 // Primary app routes.
 //
 app.get('/', homeController.index);
+app.get('/dashboard', passportConfig.ensureLoggedIn({role: 'admin'}), homeController.index)
+// app.get('/dashboard/profile/:applicant', passportConfig.ensureLoggedIn({role: 'admin'}), homeController.index)
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/signup', userController.getSignup);
@@ -129,6 +131,7 @@ app.post('/account/password', passportConfig.ensureLoggedIn(), userController.po
 app.post('/account/profile', passportConfig.ensureLoggedIn(), userController.postUpdateProfile);
 app.post('/account/delete', passportConfig.ensureLoggedIn(), userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.ensureLoggedIn(), userController.getOauthUnlink);
+
 
 
 // ======================================
