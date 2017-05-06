@@ -1,12 +1,16 @@
 {
-  "name": "express Starter Boilerplate",
+  "name": "express-starter-boilerplate",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
     "test": "mocha tests",
     "start": "NODE_ENV=development nodemon -e njk,js server.js",
-    "eslint": "eslint server.js"
+    "eslint": "eslint server.js",
+    "dev": "webpack --watch",
+    "dev:compile": "webpack",
+    "jest": "jest",
+    "jest:watch": "jest --watch"
   },
   "author": "Mohammad Mohammad",
   "license": "ISC",
@@ -28,14 +32,19 @@
     "nunjucks": "^3.0.0",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "prop-types": "^15.5.8",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.1.3",
     "eslint-plugin-import": "^2.2.0",
     "mocha": "^3.3.0",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "webpack": "^2.5.0"
   }
 }
