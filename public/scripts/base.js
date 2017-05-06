@@ -123,7 +123,7 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "body {\n  background-color: orange; }\n  body p:before {\n    content: 'HAIIIII'; }\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
