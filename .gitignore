@@ -1,7 +1,10 @@
 # Static assets
-public/scripts
-puclib/stylesheets
+
+# public/scripts
+# public/stylesheets
+
 # Node build artifacts
+
 node_modules
 npm-debug.log
 
