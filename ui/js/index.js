@@ -7,7 +7,7 @@ function init() {
     // This is the index page
     ReactDOM.render(
         <IndexPage />,
-        document.getElementById('container')
+        document.getElementById('loggedInIndexPage')
     );
 }
 
