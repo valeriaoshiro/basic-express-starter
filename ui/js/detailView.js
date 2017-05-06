@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import axios from 'axios';
 
-import ApplicantsPage from './components/applicantsPage';
+import ApplicantsPage from './components/githubDetailView';
 import '../scss/base.scss';
 
 function init(){

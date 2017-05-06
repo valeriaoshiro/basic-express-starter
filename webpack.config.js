@@ -22,7 +22,7 @@ module.exports = (env) => {
           entry: {
               base: path.join(__dirname, 'ui/js/base.js'),
               index: path.join(__dirname, 'ui/js/index.js'),
-              applicant: path.join(__dirname, 'ui/js/applicant.js')
+              detailView: path.join(__dirname, 'ui/js/detailView.js')
           },
           output: {
               path: path.join(__dirname, 'public/scripts'),
