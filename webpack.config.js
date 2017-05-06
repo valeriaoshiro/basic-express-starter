@@ -7,7 +7,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 module.exports = (env) => {
     const ENV = env ? 'production' : 'development';
     /*eslint-disable*/
-    console.log('Now building GSMATT '+ENV.toUpperCase()+' build');
+    console.log('Now building Hackathon Boilerplate '+ENV.toUpperCase()+' build');
     /*eslint-enable*/
 
     const plugins = ENV === 'production' ?

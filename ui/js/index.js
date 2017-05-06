@@ -4,8 +4,7 @@ import ReactDOM from 'react-dom';
 import IndexPage from './components/indexPage';
 
 function init() {
-    console.log('index file');
-
+    // This is the index page
     ReactDOM.render(
         <IndexPage />,
         document.getElementById('container')
