@@ -21,19 +21,7 @@
     {% include '_includes/nav.njk' %}
 
     <div class="container">
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-            <img src="https://www.ziprecruiter.com/zrs/092371be/img/logos/ziprecruiter-blacktext.svg" alt="" class="logo"/>
-            </a>
-          </div>
-        </div>
-      </nav>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active">Applicant</li>
-      </ol>
+      {% include '_includes/breadcrumb.njk' %}
       {% include '_includes/flash.njk' %}
       {% block main %}
       {% endblock %}
