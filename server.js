@@ -56,7 +56,7 @@ app.use(expressValidator());
 // MongoDB setup
 //
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI;
+mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on('error', (err) => {
   console.error(err);
   console.log(`${chalk.red('✗')} MongoDB connection error. Please make sure MongoDB is running.`);
