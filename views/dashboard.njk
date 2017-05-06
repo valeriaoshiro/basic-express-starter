@@ -11,7 +11,7 @@
 {% if applicants %}
 {% for user in applicants %}
 <ul>
-  <li>{{user.profile.first_name}} {{user.profile.last_name}}</li>
+  <li><a href="/dashboard/{{ user.id }}">{{user.profile.first_name}} {{user.profile.last_name}}</a></li>
 </ul>
 {% endfor %}
 {% endif %}

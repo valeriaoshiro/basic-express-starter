@@ -121,6 +121,7 @@ app.use((req, res, next) => {
 //
 app.get('/', homeController.index);
 app.get('/dashboard', passportConfig.ensureLoggedIn({role: 'admin'}), dashController.getDashboard);
+app.get('/dashboard/:userid', passportConfig.ensureLoggedIn({role: 'admin'}), dashController.getUserProfile);
 // app.get('/dashboard/profile/:applicant', passportConfig.ensureLoggedIn({role: 'admin'}), homeController.index)
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
