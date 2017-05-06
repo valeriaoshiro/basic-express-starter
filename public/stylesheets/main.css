@@ -9,3 +9,25 @@
   border-bottom: 1px solid #ededed;
 }
 
+body {
+  background: #f5f6f7;
+}
+
+.logo {
+  height: 50px;
+}
+
+.breadcrumb li a{
+  color: #72af07;
+}
+
+.job-desc {
+  margin: 40px 0;
+}
+
+.applicant-box {
+  background: white; 
+  padding: 3%;
+  margin: 2%;
+  border: 1px solid #e0e2e3;
+}

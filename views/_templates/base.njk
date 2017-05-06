@@ -20,11 +20,25 @@
 
     {% include '_includes/nav.njk' %}
 
-    <div class="container mt-4">
+    <div class="container">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+            <img src="https://www.ziprecruiter.com/zrs/092371be/img/logos/ziprecruiter-blacktext.svg" alt="" class="logo"/>
+            </a>
+          </div>
+        </div>
+      </nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active">Applicant</li>
+      </ol>
       {% include '_includes/flash.njk' %}
       {% block main %}
       {% endblock %}
     </div>
+
 
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
@@ -32,3 +46,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
   </body>
 </html>
+
+
+
+
+
+
