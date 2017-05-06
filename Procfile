@@ -1,1 +1,1 @@
-web: node server.js
+web: yarn && yarn dev:compile && node server.js
