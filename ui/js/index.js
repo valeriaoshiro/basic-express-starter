@@ -5,10 +5,13 @@ import IndexPage from './components/indexPage';
 
 function init() {
     // This is the index page
-    ReactDOM.render(
-        <IndexPage />,
-        document.getElementById('loggedInIndexPage')
-    );
+    const userLoggedIn = document.getElementById('loggedInIndexPage');
+    if(userLoggedIn) {
+        ReactDOM.render(
+            <IndexPage />,
+        userLoggedIn
+        );
+    }
 }
 
 document.addEventListener('DOMContentLoaded', init);
