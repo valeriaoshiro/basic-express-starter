@@ -1,7 +1,7 @@
 // let webpack = require('webpack');
 
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = (env) => {
@@ -12,7 +12,7 @@ module.exports = (env) => {
 
     const plugins = ENV === 'production' ?
     [
-        new ExtractTextPlugin(path.join(__dirname, 'dist/[main].css')),
+        // new ExtractTextPlugin(path.join(__dirname, 'dist/[main].css')),
         new UglifyJSPlugin({
           mangle: false,
           comments: false
@@ -20,7 +20,8 @@ module.exports = (env) => {
 
      const config = {
           entry: {
-              base: path.join(__dirname, 'ui/js/base.js')
+              base: path.join(__dirname, 'ui/js/base.js'),
+              index: path.join(__dirname, 'ui/js/index.js')
           },
           output: {
               path: path.join(__dirname, 'public/scripts'),
@@ -62,7 +63,7 @@ module.exports = (env) => {
                             options: {
                                 resources: [
                                     path.join(__dirname, 'ui/scss/modules/vars.scss'),
-                                    path.join(__dirname, 'ui/scss/modules/mixins.scss'),
+                                    path.join(__dirname, 'ui/scss/modules/mixins.scss')
                                 ]
                             }
                         }
@@ -78,5 +79,6 @@ module.exports = (env) => {
         },
         plugins
     };
+
     return config;
 };

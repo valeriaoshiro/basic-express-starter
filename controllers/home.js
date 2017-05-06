@@ -4,7 +4,7 @@
 // Home page.
 //
 exports.index = (req, res) => {
-  res.render('index', { title: 'Project' });
+  res.render('index', { title: 'Project', pageName: 'index' });
 };
 
 
