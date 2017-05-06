@@ -117,12 +117,27 @@ app.use((req, res, next) => {
 
 
 // ======================================
+// Add breadcrumbs
+//
+app.use((req, res, next) => {
+  const urls = req.originalUrl.split('/');
+  urls.shift();
+  res.locals.breadcrumbs = urls.map((url, i) => {
+    return {
+      name: (url === '' ? 'Home' : url.charAt(0).toUpperCase() + url.slice(1)),
+      url: `/${urls.slice(0, i + 1).join('/')}`,
+    };
+  });
+  next();
+});
+
+
+// ======================================
 // Primary app routes.
 //
 app.get('/', homeController.index);
 app.get('/dashboard', passportConfig.ensureLoggedIn({role: 'admin'}), dashController.getDashboard);
 app.get('/dashboard/:userid', passportConfig.ensureLoggedIn({role: 'admin'}), dashController.getUserProfile);
-app.get('/dashboard/:userid/detail', passportConfig.ensureLoggedIn({role: 'admin'}), dashController.getUserProfile);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/signup', userController.getSignup);

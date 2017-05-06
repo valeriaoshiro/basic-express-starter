@@ -1,6 +1,13 @@
-<ol class="breadcrumb">
-	<li class="breadcrumb-item"><a href="#">Home</a></li>
-	<li class="breadcrumb-item active">Applicants</li>
+<ol class="breadcrumb mt-3">
+
+  {% for bread in breadcrumbs %}
+  <li class="breadcrumb-item">
+    {% if not loop.last %}<a href="{{bread.url}}">{% endif %}
+      {{bread.name}}
+    {% if not loop.last %}</a>{% endif %}
+  </li>
+  {% endfor %}
+
 </ol>
 
 

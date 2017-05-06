@@ -25,6 +25,8 @@ exports.getDashboard = (req, res, next) => {
 exports.getUserProfile = (req, res, next) => {
   User.findOne({ _id: req.params.userid, role: 'applicant'}).exec()
     .then((user_profile) => {
+      const breadcrumbs = res.locals.breadcrumbs;
+      breadcrumbs[breadcrumbs.length-1].name = req.user.email;
       res.render('userprofile',
         {
           title: `User Profile: ${user_profile.profile.first_name} ${user_profile.profile.last_name}`,
