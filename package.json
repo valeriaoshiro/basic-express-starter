@@ -15,6 +15,7 @@
   "author": "Mohammad Mohammad",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.16.1",
     "babel-preset-env": "^1.4.0",
     "bcrypt": "^1.0.2",
     "bcrypt-nodejs": "^0.0.3",
