@@ -3,12 +3,20 @@
   "plugins": [
       "import"
   ],
+  "env": {
+    "node": "true",
+    "browser": "true",
+    "jquery": "true",
+    "es6": "true"
+  },
   "rules": {
     "no-use-before-define": "off",
     "no-unused-vars": ["error", { "argsIgnorePattern": "next" }],
     "consistent-return": "off",
     "no-param-reassign": "off",
     "no-shadow": ["error", { "allow": ["err"] }],
-    "func-names": "off"
+    "func-names": "off",
+    "comma-dangle": "off",
+    "indent": [0]
   }
 }
