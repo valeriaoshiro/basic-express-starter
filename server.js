@@ -56,7 +56,7 @@ app.use(expressValidator());
 // MongoDB setup
 //
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
+mongoose.connect(process.env.MONGODB_URI;
 mongoose.connection.on('error', (err) => {
   console.error(err);
   console.log(`${chalk.red('✗')} MongoDB connection error. Please make sure MongoDB is running.`);
@@ -132,22 +132,6 @@ app.post('/account/profile', passportConfig.ensureLoggedIn(), userController.pos
 app.post('/account/delete', passportConfig.ensureLoggedIn(), userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.ensureLoggedIn(), userController.getOauthUnlink);
 
-
-
-// ======================================
-// OAuth authentication routes. (Sign in)
-//
-app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'public_profile'] }));
-app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), (req, res) => {
-  const redirectTo = req.session.returnTo || '/';
-  delete req.session.returnTo;
-  res.redirect(redirectTo);
-});
-
-app.get('/test', passportConfig.ensureLoggedIn(), passportConfig.isAuthorized('facebook'),
-  (req, res, next) => {
-    res.status(200).json({ success: true });
-  });
 
 // ======================================
 // catch 404 and forward to error handler
