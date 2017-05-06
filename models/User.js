@@ -7,14 +7,19 @@ const userSchema = new mongoose.Schema({
   password: String,
   passwordResetToken: String,
   passwordResetExpires: Date,
+  role: { type: String, default: 'applicant' },
 
-  facebook: String,
-  instagram: String,
-  tokens: Array,
+  // facebook: String,
+  // instagram: String,
+  // github: String,
+  // tokens: Array,
 
   profile: {
     first_name: String,
     last_name: String,
+    github_username: String,
+    stackoverflow_username: String,
+    resume: String
   },
 }, { timestamps: true });
 
