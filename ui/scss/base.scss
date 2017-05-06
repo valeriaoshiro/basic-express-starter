@@ -1,0 +1,7 @@
+body {
+    background-color: orange;
+
+    p {
+        &:before { content: 'HAIIIII'; }
+    }
+}

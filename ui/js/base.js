@@ -1,7 +1,7 @@
-
+import '../scss/base.scss';
 
 function init() {
-    console.log('index file');
+    console.log('BaseJS file');
 }
 
 document.addEventListener('DOMContentLoaded', init);
