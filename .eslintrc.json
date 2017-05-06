@@ -1,22 +1,30 @@
 {
-  "extends": "airbnb-base",
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+        "jsx": true
+    }
+  },
+
   "plugins": [
-      "import"
+      "import",
+      "react"
   ],
   "env": {
-    "node": "true",
     "browser": "true",
     "jquery": "true",
     "es6": "true"
   },
   "rules": {
     "no-use-before-define": "off",
-    "no-unused-vars": ["error", { "argsIgnorePattern": "next" }],
+    "no-unused-vars": [1, { "argsIgnorePattern": "next" }],
     "consistent-return": "off",
     "no-param-reassign": "off",
     "no-shadow": ["error", { "allow": ["err"] }],
     "func-names": "off",
     "comma-dangle": "off",
+    "no-console": 1,
     "indent": [0]
   }
 }

@@ -1,7 +1,8 @@
+import React from 'react';
 import '../scss/base.scss';
 
 function init() {
-    console.log('BaseJS file');
+let hey = <div>hey</div>;
 }
 
 document.addEventListener('DOMContentLoaded', init);

@@ -1,4 +1,6 @@
-
+# Static assets
+public/scripts
+puclib/stylesheets
 # Node build artifacts
 node_modules
 npm-debug.log
