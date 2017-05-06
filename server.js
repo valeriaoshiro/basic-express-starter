@@ -133,6 +133,25 @@ app.post('/account/profile', passportConfig.ensureLoggedIn(), userController.pos
 app.post('/account/delete', passportConfig.ensureLoggedIn(), userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.ensureLoggedIn(), userController.getOauthUnlink);
 
+app.get('/applicant', (req, res) => {
+  res.render('applicant', {pageName: 'applicant'});
+});
+
+// ======================================
+// OAuth authentication routes. (Sign in)
+//
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'public_profile'] }));
+app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), (req, res) => {
+  const redirectTo = req.session.returnTo || '/';
+  delete req.session.returnTo;
+  res.redirect(redirectTo);
+});
+
+app.get('/test', passportConfig.ensureLoggedIn(), passportConfig.isAuthorized('facebook'),
+  (req, res, next) => {
+    res.status(200).json({ success: true });
+  });
+
 
 // ======================================
 // catch 404 and forward to error handler
@@ -221,4 +240,3 @@ function onListening() {
     : `port ${addr.port}`;
   debug(`Listening on ${bind}`);
 }
-

@@ -21,7 +21,8 @@ module.exports = (env) => {
      const config = {
           entry: {
               base: path.join(__dirname, 'ui/js/base.js'),
-              index: path.join(__dirname, 'ui/js/index.js')
+              index: path.join(__dirname, 'ui/js/index.js'),
+              applicant: path.join(__dirname, 'ui/js/applicant.js')
           },
           output: {
               path: path.join(__dirname, 'public/scripts'),
