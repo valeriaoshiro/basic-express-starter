@@ -92,7 +92,7 @@ app.use(csrf(), (req, res, next) => {
 // flash messages setup
 //
 app.use((req, res, next) => {
-  connectFlash()(req, res, function() {
+  connectFlash()(req, res, () => {
     // res.locals.messages = req.flash();
     const render = res.render;
     res.render = function (...args) {
