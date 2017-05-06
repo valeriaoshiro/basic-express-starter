@@ -22,6 +22,7 @@ const passportConfig = require('./config/passport');
 
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
+const dashController = require('./controllers/dashboard');
 
 
 // ======================================
@@ -119,7 +120,7 @@ app.use((req, res, next) => {
 // Primary app routes.
 //
 app.get('/', homeController.index);
-app.get('/dashboard', passportConfig.ensureLoggedIn({role: 'admin'}), homeController.index)
+app.get('/dashboard', passportConfig.ensureLoggedIn({role: 'admin'}), dashController.getDashboard);
 // app.get('/dashboard/profile/:applicant', passportConfig.ensureLoggedIn({role: 'admin'}), homeController.index)
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);

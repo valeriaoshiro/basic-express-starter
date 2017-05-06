@@ -1,0 +1,19 @@
+{% extends "_templates/base.njk" %}
+
+{% block main %}
+
+<h1 class='page-header'>{{ title }}</h1>
+{% if user %}
+    <div id="dashboard"></div>
+{% endif %}
+
+<h2>Applicants</h2>
+{% if applicants %}
+{% for user in applicants %}
+<ul>
+  <li>{{user.profile.first_name}} {{user.profile.last_name}}</li>
+</ul>
+{% endfor %}
+{% endif %}
+
+{% endblock %}
