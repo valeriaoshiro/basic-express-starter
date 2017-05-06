@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha tests",
     "start": "NODE_ENV=development nodemon -e njk,js server.js",
-    "deploy": "yarn && yarn dev:compile && git push heroku master",
+    "deploy": "git push heroku master",
     "eslint": "eslint server.js",
     "dev": "webpack --watch",
     "dev:compile": "webpack",
