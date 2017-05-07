@@ -15,10 +15,6 @@ body {
   background: #f5f6f7;
 }
 
-.logo {
-  height: 50px;
-}
-
 .breadcrumb li a{
   color: #72af07;
 }
@@ -27,13 +23,29 @@ body {
   margin: 40px 0;
 }
 
-.applicant-box {
-  background: white;
+.applicantlist-box {
+  background: white; 
   padding: 3%;
   margin: 2%;
   border: 1px solid #e0e2e3;
 }
 
+
 .user-row {
     cursor: pointer;
+}
+ul {
+  list-style-type: none;
+}
+
+.icons {
+  margin-right: 15%;
+  width: 30%;
+}
+.icons a {
+  color: black;
+  padding-left: 20%;
+}
+.icons a i:hover {
+  color: #72af07;
 }
