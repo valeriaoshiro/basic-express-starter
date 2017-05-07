@@ -163,6 +163,13 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRe
   res.redirect(redirectTo);
 });
 
+app.get('/auth/github', passport.authenticate('github', { scope: ['email', 'public_profile'] }));
+app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), (req, res) => {
+  const redirectTo = req.session.returnTo || '/';
+  delete req.session.returnTo;
+  res.redirect(redirectTo);
+});
+
 app.get('/test', passportConfig.ensureLoggedIn(), passportConfig.isAuthorized('facebook'),
   (req, res, next) => {
     res.status(200).json({ success: true });

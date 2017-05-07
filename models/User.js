@@ -11,8 +11,8 @@ const userSchema = new mongoose.Schema({
 
   // facebook: String,
   // instagram: String,
-  // github: String,
-  // tokens: Array,
+  github: String,
+  tokens: Array,
 
   profile: {
     first_name: String,

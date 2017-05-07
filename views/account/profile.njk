@@ -56,10 +56,10 @@
     <div class="col-md-6 mb-4">
 
       <div class="d-flex align-items-center mb-2">
-        <a href='#' class="btn btn-block btn-social btn-instagram {% if user.instagram %}disabled{% endif %}">
-          <span class="fa fa-instagram"></span>Link Instgram Account
+        <a href='/auth/github' class="btn btn-block btn-social btn-github {% if user.github %}disabled{% endif %}">
+          <span class="fa fa-github"></span>Link Github Account
         </a>
-        {% if user.instagram %}
+        {% if user.github %}
         <div class="ml-1"><a href='#' class="text-danger">unlink</a></div>
         {% endif %}
       </div>
