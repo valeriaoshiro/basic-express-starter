@@ -11,7 +11,7 @@ exports.getDashboard = (req, res, next) => {
       res.render('dashboard',
         {
           title: 'Dashboard',
-          pageName: 'dashboard',
+          pageName: 'userListView',
           applicants,
         });
     })
