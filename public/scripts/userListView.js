@@ -22152,7 +22152,7 @@ var UserListViewPage = function (_React$Component) {
     }, {
         key: 'onUserClick',
         value: function onUserClick(evt) {
-            console.log('click!', evt);
+            console.log('click!  ', evt);
         }
     }, {
         key: 'render',

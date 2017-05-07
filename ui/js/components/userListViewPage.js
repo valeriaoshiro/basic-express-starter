@@ -18,7 +18,7 @@ class UserListViewPage extends React.Component {
     }
 
     onUserClick(evt) {
-        console.log('click!', evt);
+        console.log('click!  ', evt);
     }
 
     render() {
