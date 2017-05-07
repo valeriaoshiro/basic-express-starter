@@ -1,4 +1,7 @@
 This is an almost replica of [hackathon-starter](https://github.com/sahat/hackathon-starter)
+
+This project was created for ZipRecruiter Hackathon 2017 and is a HR webapp to help streamline the hiring search process. This webapp uses the GitHub API to integrate different candidate's GitHub activity into one page.
+
 ## PREREQUISITES
 *  `yarn` - a package manager
 * 'mongodb' - This process should already be running with `mongod` on the CLI
