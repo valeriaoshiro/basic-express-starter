@@ -1,7 +1,7 @@
 # Static assets
 
-# public/scripts
-# public/stylesheets
+public/scripts
+public/stylesheets
 
 # Node build artifacts
 
