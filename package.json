@@ -42,6 +42,7 @@
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "request-promise": "^4.2.0",
     "sort-by": "^1.2.0"
   },
   "devDependencies": {

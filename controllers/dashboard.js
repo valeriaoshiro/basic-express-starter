@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const github = require('../service/github');
 
 
 // ======================================
@@ -8,12 +9,24 @@ const User = require('../models/User');
 exports.getDashboard = (req, res, next) => {
   User.find({role: 'applicant'}).exec()
     .then((applicants) => {
-      res.render('dashboard',
-        {
-          title: 'Dashboard',
-          pageName: 'userListView',
-          applicants,
-        });
+      const reposPromises = applicants.map(u => {
+        if (!u.github) {
+          req.flash('danger', 'some users dont have their github account linked');
+          return res.redirect('/');
+        }
+        const token = u.tokens.find(token => token.kind === 'github');
+        return github.getRepos(token.accessToken);
+      })
+      Promise.all(reposPromises)
+        .then((repos) => {
+          res.render('dashboard',
+            {
+              title: 'Dashboard',
+              pageName: 'userListView',
+              applicants,
+              repos,
+            });
+        }).catch(err => next(err));
     })
     .catch(err => next(err));
 };
