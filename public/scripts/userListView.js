@@ -22151,19 +22151,24 @@ var UserListViewPage = function (_React$Component) {
         }
     }, {
         key: 'onUserClick',
-        value: function onUserClick(evt) {
-            console.log('click!  ', evt);
+        value: function onUserClick(userComponent) {
+            userComponent.setState({
+                selected: !userComponent.state.selected
+            });
         }
     }, {
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             var users = this.props.users.sort((0, _sortBy2.default)(this.state.sort));
             return _react2.default.createElement(
                 'div',
                 { className: 'clearfix' },
                 users.map(function (user, idx) {
                     return _react2.default.createElement(_user2.default, _extends({
-                        key: idx
+                        key: idx,
+                        onClick: _this2.onUserClick
                     }, user));
                 })
             );
@@ -22247,6 +22252,8 @@ var User = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             var expandedInfo = this.state.selected ? _react2.default.createElement(
                 'div',
                 { className: 'user-expand col-sm-12' },
@@ -22256,7 +22263,9 @@ var User = function (_React$Component) {
                 'div',
                 {
                     className: 'user-root row',
-                    onClick: this.props.onClick,
+                    onClick: function onClick() {
+                        _this2.props.onClick(_this2);
+                    },
                     'data-uuid': this.props.userData
                 },
                 _react2.default.createElement(
@@ -22270,22 +22279,7 @@ var User = function (_React$Component) {
                     _react2.default.createElement(
                         'p',
                         null,
-                        'Icon'
-                    ),
-                    _react2.default.createElement(
-                        'p',
-                        null,
-                        'Icon'
-                    ),
-                    _react2.default.createElement(
-                        'p',
-                        null,
-                        'Icon'
-                    ),
-                    _react2.default.createElement(
-                        'p',
-                        null,
-                        'Icon'
+                        'Icons go in here'
                     )
                 ),
                 expandedInfo

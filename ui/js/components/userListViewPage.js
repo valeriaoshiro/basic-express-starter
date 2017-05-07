@@ -17,8 +17,10 @@ class UserListViewPage extends React.Component {
         });
     }
 
-    onUserClick(evt) {
-        console.log('click!  ', evt);
+    onUserClick(userComponent) {
+        userComponent.setState({
+            selected: !userComponent.state.selected
+        });
     }
 
     render() {
@@ -29,6 +31,7 @@ class UserListViewPage extends React.Component {
                     return (
                         <User
                             key={idx}
+                            onClick={this.onUserClick}
                             {...user}
                         />
                     );

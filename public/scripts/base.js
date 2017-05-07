@@ -108,7 +108,7 @@ exports = module.exports = __webpack_require__(186)(undefined);
 
 
 // module
-exports.push([module.i, ".border-bottom {\n  border-bottom: 1px solid #ededed; }\n\n.page-header {\n  padding-bottom: 1rem;\n  margin-bottom: 3rem;\n  border-bottom: 1px solid #ededed; }\n\nbody {\n  background: #f5f6f7; }\n\n.logo {\n  height: 50px; }\n\n.breadcrumb li a {\n  color: #72af07; }\n\n.job-desc {\n  margin: 40px 0; }\n\n.applicant-box {\n  background: white;\n  padding: 3%;\n  margin: 2%;\n  border: 1px solid #e0e2e3; }\n", ""]);
+exports.push([module.i, ".border-bottom {\n  border-bottom: 1px solid #ededed; }\n\n.page-header {\n  padding-bottom: 1rem;\n  margin-bottom: 3rem;\n  border-bottom: 1px solid #ededed; }\n\nbody {\n  background: #f5f6f7; }\n\n.logo {\n  height: 50px; }\n\n.breadcrumb li a {\n  color: #72af07; }\n\n.job-desc {\n  margin: 40px 0; }\n\n.applicant-box {\n  background: white;\n  padding: 3%;\n  margin: 2%;\n  border: 1px solid #e0e2e3; }\n\n.user-row {\n  cursor: pointer; }\n", ""]);
 
 // exports
 

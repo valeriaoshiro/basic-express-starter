@@ -22,17 +22,15 @@ class User extends React.Component {
         return (
             <div
                 className="user-root row"
-                onClick={this.props.onClick}
+                onClick={()=> {this.props.onClick(this)}}
                 data-uuid={this.props.userData}
             >
                 <div className="col-sm-6 row-user">
                     {this.props.name}
                 </div>
                 <div className="col-sm-6 row-icons">
-                    <p>Icon</p>
-                    <p>Icon</p>
-                    <p>Icon</p>
-                    <p>Icon</p>
+                    <p>Icons go in here</p>
+
                 </div>
                 {expandedInfo}
             </div>
