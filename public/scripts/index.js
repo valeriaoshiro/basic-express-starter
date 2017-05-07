@@ -22091,6 +22091,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function init() {
     // This is the index page
+    console.log('Index Page');
     _reactDom2.default.render(_react2.default.createElement(_indexPage2.default, null), document.getElementById('loggedInIndexPage'));
 }
 

@@ -3,8 +3,9 @@
 {% block main %}
 
 <h1 class='page-header'>Home Page</h1>
-{% if user %}
+{% if user.role == 'applicant' %}
     <div id="loggedInIndexPage"></div>
+
 {% else %}
     Here is where stuff goes on the index page if there is no user logged in
 {% endif %}
