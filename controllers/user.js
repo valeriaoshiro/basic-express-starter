@@ -77,7 +77,6 @@ exports.postSignup = (req, res, next) => {
   req.sanitize('email').normalizeEmail({ remove_dots: false });
 
   const errors = req.validationErrors();
-
   if (errors) {
     req.flash('danger', errors.map(err => err.msg));
     return res.redirect('/signup');
@@ -86,6 +85,7 @@ exports.postSignup = (req, res, next) => {
   const user = new User({
     email: req.body.email,
     password: req.body.password,
+    role: req.body.isAdmin ? 'admin' : 'applicant',
     profile: {
       first_name: req.body.firstName,
       last_name: req.body.lastName,

@@ -39,7 +39,8 @@
     "passport-local": "^1.0.0",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "sort-by": "^1.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
