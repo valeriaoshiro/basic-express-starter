@@ -16,22 +16,22 @@ class User extends React.Component {
 
     render() {
         return (
+            <div className="applicantlist-box rounded">
             <div
                 className="user-root row"
                 onClick={()=> {this.props.onClick(this)}}
-                data-uuid={this.props.userData}>
-
-                <div className="col-sm-6 row-user">
+                data-uuid={this.props.userData}
+            >
+                <div className="d-flex justify-content-end align-items-center">
+                    <div className="mr-auto p-2">
                     {this.props.name}
-                </div>
-                <div className="col-sm-6 row-icons">
-                    <p>Icons go in here</p>
-
-                </div>
-                <div className={classNames("user-expand", "col-sm-12",
-                    { "collapse": !this.state.selected})}>
-                    This is the expanded user info
-                </div>
+                    </div>
+                    <div className="icons d-flex justify-content-end">
+                        <a href="#"><i className="fa fa-github fa-3x" aria-hidden="true"></i></a>
+                    </div>
+                </div>  
+                {expandedInfo}
+                </div>  
             </div>
         );
     }
