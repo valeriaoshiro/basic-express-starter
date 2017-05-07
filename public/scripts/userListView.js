@@ -22112,7 +22112,7 @@ var _propTypes = __webpack_require__(183);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _sortBy = __webpack_require__(226);
+var _sortBy = __webpack_require__(227);
 
 var _sortBy2 = _interopRequireDefault(_sortBy);
 
@@ -22222,6 +22222,10 @@ var _propTypes = __webpack_require__(183);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+var _classnames = __webpack_require__(223);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22254,11 +22258,6 @@ var User = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
-            var expandedInfo = this.state.selected ? _react2.default.createElement(
-                'div',
-                { className: 'user-expand col-sm-12' },
-                'This is the expanded user info'
-            ) : undefined;
             return _react2.default.createElement(
                 'div',
                 {
@@ -22266,8 +22265,7 @@ var User = function (_React$Component) {
                     onClick: function onClick() {
                         _this2.props.onClick(_this2);
                     },
-                    'data-uuid': this.props.userData
-                },
+                    'data-uuid': this.props.userData },
                 _react2.default.createElement(
                     'div',
                     { className: 'col-sm-6 row-user' },
@@ -22282,7 +22280,11 @@ var User = function (_React$Component) {
                         'Icons go in here'
                     )
                 ),
-                expandedInfo
+                _react2.default.createElement(
+                    'div',
+                    { className: (0, _classnames2.default)("user-expand", "col-sm-12", { "collapse": !this.state.selected }) },
+                    'This is the expanded user info'
+                )
             );
         }
     }]);
@@ -22340,9 +22342,64 @@ document.addEventListener('DOMContentLoaded', init);
 /***/ }),
 /* 221 */,
 /* 222 */,
-/* 223 */,
+/* 223 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+  Copyright (c) 2016 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+
+	function classNames () {
+		var classes = [];
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes.push(arg);
+			} else if (Array.isArray(arg)) {
+				classes.push(classNames.apply(null, arg));
+			} else if (argType === 'object') {
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes.push(key);
+					}
+				}
+			}
+		}
+
+		return classes.join(' ');
+	}
+
+	if (typeof module !== 'undefined' && module.exports) {
+		module.exports = classNames;
+	} else if (true) {
+		// register as 'classnames', consistent with npm package name
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+			return classNames;
+		}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {
+		window.classNames = classNames;
+	}
+}());
+
+
+/***/ }),
 /* 224 */,
-/* 225 */
+/* 225 */,
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory){
@@ -22591,10 +22648,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
-/* 226 */
+/* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var objectPath = __webpack_require__(225);
+var objectPath = __webpack_require__(226);
 var sortBy;
 var sort;
 var type;

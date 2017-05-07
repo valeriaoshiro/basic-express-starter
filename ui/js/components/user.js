@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 class User extends React.Component {
     constructor(props) {
@@ -14,17 +15,12 @@ class User extends React.Component {
     }
 
     render() {
-        let expandedInfo = this.state.selected ? (
-            <div className="user-expand col-sm-12">
-                This is the expanded user info
-            </div>
-        ) : undefined;
         return (
             <div
                 className="user-root row"
                 onClick={()=> {this.props.onClick(this)}}
-                data-uuid={this.props.userData}
-            >
+                data-uuid={this.props.userData}>
+
                 <div className="col-sm-6 row-user">
                     {this.props.name}
                 </div>
@@ -32,7 +28,10 @@ class User extends React.Component {
                     <p>Icons go in here</p>
 
                 </div>
-                {expandedInfo}
+                <div className={classNames("user-expand", "col-sm-12",
+                    { "collapse": !this.state.selected})}>
+                    This is the expanded user info
+                </div>
             </div>
         );
     }

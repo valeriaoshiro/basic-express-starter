@@ -63,12 +63,142 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 84);
+/******/ 	return __webpack_require__(__webpack_require__.s = 216);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 187:
+/***/ 182:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(185);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(188)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../node_modules/css-loader/index.js??ref--2-1!../../node_modules/postcss-loader/index.js!../../node_modules/sass-loader/lib/loader.js??ref--2-3!../../node_modules/sass-resources-loader/lib/loader.js??ref--2-4!./base.scss", function() {
+			var newContent = require("!!../../node_modules/css-loader/index.js??ref--2-1!../../node_modules/postcss-loader/index.js!../../node_modules/sass-loader/lib/loader.js??ref--2-3!../../node_modules/sass-resources-loader/lib/loader.js??ref--2-4!./base.scss");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 185:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(186)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, ".border-bottom {\n  border-bottom: 1px solid #ededed; }\n\n.page-header {\n  padding-bottom: 1rem;\n  margin-bottom: 3rem;\n  border-bottom: 1px solid #ededed; }\n\nbody {\n  background: #f5f6f7; }\n\n.breadcrumb li a {\n  color: #72af07; }\n\n.job-desc {\n  margin: 40px 0; }\n\n.applicantlist-box {\n  background: white;\n  padding: 3%;\n  margin: 2%;\n  border: 1px solid #e0e2e3; }\n\n.user-row, .user-root {\n  cursor: pointer; }\n\nul {\n  list-style-type: none; }\n\n.icons {\n  margin-right: 15%;\n  width: 30%; }\n\n.icons a {\n  color: black;\n  padding-left: 20%; }\n\n.icons a i:hover {\n  color: #72af07; }\n\n.user-expand {\n  height: 100px;\n  overflow: hidden;\n  -webkit-transition: all 2s;\n  transition: all 2s; }\n  .user-expand.collapse {\n    height: 0px; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 186:
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+
+/***/ 188:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -105,7 +235,7 @@ var stylesInDom = {},
 	singletonElement = null,
 	singletonCounter = 0,
 	styleElementsInsertedAtTop = [],
-	fixUrls = __webpack_require__(188);
+	fixUrls = __webpack_require__(189);
 
 module.exports = function(list, options) {
 	if(typeof DEBUG !== "undefined" && DEBUG) {
@@ -382,7 +512,7 @@ function updateLink(linkElement, options, obj) {
 
 /***/ }),
 
-/***/ 188:
+/***/ 189:
 /***/ (function(module, exports) {
 
 
@@ -478,45 +608,13 @@ module.exports = function (css) {
 
 /***/ }),
 
-/***/ 83:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(86);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
-var transform;
-
-var options = {}
-options.transform = transform
-// add the styles to the DOM
-var update = __webpack_require__(187)(content, options);
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../node_modules/css-loader/index.js??ref--2-1!../../node_modules/postcss-loader/index.js!../../node_modules/sass-loader/lib/loader.js??ref--2-3!../../node_modules/sass-resources-loader/lib/loader.js??ref--2-4!./base.scss", function() {
-			var newContent = require("!!../../node_modules/css-loader/index.js??ref--2-1!../../node_modules/postcss-loader/index.js!../../node_modules/sass-loader/lib/loader.js??ref--2-3!../../node_modules/sass-resources-loader/lib/loader.js??ref--2-4!./base.scss");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
-/***/ 84:
+/***/ 216:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(83);
+__webpack_require__(182);
 
 function init() {
     // This base JS file is what's loaded on every single page. Be careful what you
@@ -526,104 +624,6 @@ function init() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
-
-/***/ }),
-
-/***/ 86:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(87)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, ".border-bottom {\n  border-bottom: 1px solid #ededed; }\n\n.page-header {\n  padding-bottom: 1rem;\n  margin-bottom: 3rem;\n  border-bottom: 1px solid #ededed; }\n\nbody {\n  background: #f5f6f7; }\n\n.breadcrumb li a {\n  color: #72af07; }\n\n.job-desc {\n  margin: 40px 0; }\n\n.applicantlist-box {\n  background: white;\n  padding: 3%;\n  margin: 2%;\n  border: 1px solid #e0e2e3; }\n\n.user-row {\n  cursor: pointer; }\n\nul {\n  list-style-type: none; }\n\n.icons {\n  margin-right: 15%;\n  width: 30%; }\n\n.icons a {\n  color: black;\n  padding-left: 20%; }\n\n.icons a i:hover {\n  color: #72af07; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 87:
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
 
 /***/ })
 

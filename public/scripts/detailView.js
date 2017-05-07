@@ -22473,7 +22473,7 @@ exports = module.exports = __webpack_require__(186)(undefined);
 
 
 // module
-exports.push([module.i, ".border-bottom {\n  border-bottom: 1px solid #ededed; }\n\n.page-header {\n  padding-bottom: 1rem;\n  margin-bottom: 3rem;\n  border-bottom: 1px solid #ededed; }\n\nbody {\n  background: #f5f6f7; }\n\n.logo {\n  height: 50px; }\n\n.breadcrumb li a {\n  color: #72af07; }\n\n.job-desc {\n  margin: 40px 0; }\n\n.applicant-box {\n  background: white;\n  padding: 3%;\n  margin: 2%;\n  border: 1px solid #e0e2e3; }\n\n.user-row {\n  cursor: pointer; }\n", ""]);
+exports.push([module.i, ".border-bottom {\n  border-bottom: 1px solid #ededed; }\n\n.page-header {\n  padding-bottom: 1rem;\n  margin-bottom: 3rem;\n  border-bottom: 1px solid #ededed; }\n\nbody {\n  background: #f5f6f7; }\n\n.breadcrumb li a {\n  color: #72af07; }\n\n.job-desc {\n  margin: 40px 0; }\n\n.applicantlist-box {\n  background: white;\n  padding: 3%;\n  margin: 2%;\n  border: 1px solid #e0e2e3; }\n\n.user-row, .user-root {\n  cursor: pointer; }\n\nul {\n  list-style-type: none; }\n\n.icons {\n  margin-right: 15%;\n  width: 30%; }\n\n.icons a {\n  color: black;\n  padding-left: 20%; }\n\n.icons a i:hover {\n  color: #72af07; }\n\n.user-expand {\n  height: 100px;\n  overflow: hidden;\n  -webkit-transition: all 2s;\n  transition: all 2s; }\n  .user-expand.collapse {\n    height: 0px; }\n", ""]);
 
 // exports
 
@@ -24441,8 +24441,8 @@ function fromByteArray (uint8) {
 
 
 var base64 = __webpack_require__(221)
-var ieee754 = __webpack_require__(223)
-var isArray = __webpack_require__(224)
+var ieee754 = __webpack_require__(224)
+var isArray = __webpack_require__(225)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -26220,10 +26220,11 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(227)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(228)))
 
 /***/ }),
-/* 223 */
+/* 223 */,
+/* 224 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -26313,7 +26314,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 224 */
+/* 225 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -26324,9 +26325,9 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 225 */,
 /* 226 */,
-/* 227 */
+/* 227 */,
+/* 228 */
 /***/ (function(module, exports) {
 
 var g;
